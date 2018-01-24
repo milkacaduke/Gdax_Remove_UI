@@ -1,0 +1,38 @@
+{
+	"name": "Gdax Remove UI",
+	"description": "Removes UI cluster for Gdax, with background scripts",
+	"version": "1.0",
+	"manifest_version": 2,
+
+	// "page_action": {
+	// 	"default_title": "My Script",
+	// 	"default_popup": "popup.html"
+	// },
+
+	"permissions": [
+		//"activeTab"
+		"tabs"
+	],
+
+	"content_scripts": [
+		{
+			//"matches": ["https://www.gdax.com/*"],
+			"matches": [
+				"<all_urls>"
+			],
+			
+			"js": [
+				"jquery.js",
+				"content.js"
+			]
+		}
+	],
+	"background": {
+		"scripts": ["background.js"]
+	},
+
+	"browser_action": {
+
+	}
+
+}
