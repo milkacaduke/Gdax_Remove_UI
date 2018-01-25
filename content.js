@@ -12,7 +12,7 @@ const accountPanelBtnStr = 'AccountPanel_account-panel_2u2aK';
 const gdaxLogoStr = 'Navbar_brand_2gRf8';
 const navBarSpaceStr = 'Navbar_spacer_1-XWl';
 const productSelectionStr = 'ProductSelection_choose-product_3ZOjB';
-const openOrdersPanelStr = 'UserPanel_user-panel_W_gry UserPanel_view-only_2om96';
+const openOrdersPanelStr = 'UserPanel_user-panel_W_gry';
 
 /* Beautify elements */
 const chartStr = 'ChartPanel_chart-panel_2l4tM';
