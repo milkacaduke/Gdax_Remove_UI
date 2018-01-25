@@ -16,3 +16,10 @@ function buttonClicked(tab){
 	// Send the message to the tab with id: tab.id, or you can send it to all tabs.
 	chrome.tabs.sendMessage(tab.id, msg);
 }
+
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(request.say);
+    console.log(sender);
+  });

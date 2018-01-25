@@ -16,8 +16,10 @@ const openOrdersPanelStr = 'UserPanel_user-panel_W_gry';
 
 /* Beautify elements */
 const chartStr = 'ChartPanel_chart-panel_2l4tM';
-
-
+const topInfoOutterStr = 'Navbar_row_1C-84';
+const topInfoInnerStr = 'Navbar_info-number-wrapper_VnPY0';
+//const lastTradedPriceStr = 'MarketInfo_market-num_1lAXs';
+//const lastTradedPriceTextStr = 'MarketInfo_market-descr_2lp4B';
 
 function gotMessage(request, sender, sendResponse){
 	var leftBar = document.getElementsByClassName(leftBarStr);
@@ -46,12 +48,17 @@ function gotMessage(request, sender, sendResponse){
 			elms.push(a);
 		}
 		removeStuffs(elms);
-		beautifyUI()
-
+		beautifyUI();
 
 	}
-}
 
+	console.log("getting ready to send message to extension");
+	//sendResponse({say:"goodbye"});
+	chrome.runtime.sendMessage({say: "hello from content"}, function(response) {
+		console.log("trying to log a response here");
+	  console.log(response);
+	});
+}
 
 function removeStuffs(stuffs) {
 	console.log("removing %d elements...", stuffs.length);
@@ -60,24 +67,35 @@ function removeStuffs(stuffs) {
 		if (stuff != undefined) {
 			stuff.remove();
 		}
-		/*for (let elm of stuff) {
-			elm.remove();
-		}*/
 	}
 }
 
 function beautifyUI() {
 	var chart = document.getElementsByClassName(chartStr);
+	var topInfoOutter = document.getElementsByClassName(topInfoOutterStr);
+	var topInfoInner = document.getElementsByClassName(topInfoInnerStr);
+
 	//chart[0].setAttribute("style", "display:none;");
 	chart[0].setAttribute("style", "left:0;");
-	
+	topInfoOutter[0].setAttribute("style", "height:200px;");
+	topInfoInner[0].setAttribute("style", "background-color:#15232c; padding-left:120px;");
+
+	// Sorry I got really lazy, gonna use jQuery...
+
+	// market info market
+	$('.MarketInfo_market-info_3lkUj .MarketInfo_market-num_1lAXs').css({'font-size':'78px', 'font-weight':'normal', 'color':'#FFFFFF'});
+	$('.MarketInfo_market-info_3lkUj .MarketInfo_market-descr_2lp4B').css({'font-size':'16px', 'font-weight':'normal', 'color':'#FFFFFF'});
+
+	$('.MarketInfo_market-info_3lkUj li').css({'margin-right':'60px'}); // change topInfo li margin-right
+	//$('.MarketInfo_market-num_1lAXs').css({'font-size':'48px', 'font-weight':'normal'});
+
+	$('.MarketInfo_price-up_1nKzy .MarketInfo_market-num_1lAXs').css({'font-size':'48px', 'font-weight':'normal', 'color':'#44be24'});
+	$('.MarketInfo_day-volume_16biA .MarketInfo_market-num_1lAXs').css({'font-size':'48px', 'font-weight':'normal', 'color':'#FFFFFF'});
+
+
 }
 
-function reload(){
-    var container = document.getElementById(id);
-    var content = container.innerHTML;
-    container.innerHTML= content; 
-    
-   //this line is to watch the result in console , you can remove it later	
-    console.log("Refreshed"); 
+function updateDiv(){
+   //$(".ChartPanel_charts_1AFGo").load(window.location.href + " .ChartPanel_charts_1AFGo" );
 }
+
