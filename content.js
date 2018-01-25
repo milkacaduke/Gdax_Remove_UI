@@ -3,6 +3,7 @@ console.log("content.js GOGOGO!");
 // Add a listener on the content 
 chrome.runtime.onMessage.addListener(gotMessage);
 
+/* Deleting elements */
 const leftBarStr = 'Sidebar_sidebar_3X-DF';
 const statusBannerStr = 'StatusBanner_status-view_2rGRs';
 const orderBookPanelStr = 'OrderBookPanel_order-book-panel_L_2ZD';
@@ -13,6 +14,9 @@ const navBarSpaceStr = 'Navbar_spacer_1-XWl';
 const productSelectionStr = 'ProductSelection_choose-product_3ZOjB';
 const openOrdersPanelStr = 'UserPanel_user-panel_W_gry UserPanel_view-only_2om96';
 
+/* Beautify elements */
+const chartStr = 'ChartPanel_chart-panel_2l4tM';
+
 
 
 function gotMessage(request, sender, sendResponse){
@@ -20,13 +24,11 @@ function gotMessage(request, sender, sendResponse){
 	var statusBanner = document.getElementsByClassName(statusBannerStr);
 	var orderBookPanel = document.getElementsByClassName(orderBookPanelStr);
 	var openOrdersPanel = document.getElementsByClassName(openOrdersPanelStr);
-
 	// Misc
 	var accountPanelBtn = document.getElementsByClassName(accountPanelBtnStr);
 	var gdaxLogo = document.getElementsByClassName(gdaxLogoStr);
 	var navBarStace = document.getElementsByClassName(navBarSpaceStr);
 	var productSelection = document.getElementsByClassName(productSelectionStr);
-
 	var panelHeaderNL = document.querySelectorAll("." + panelHeaderStr);
 
 	var elms = [];
@@ -44,6 +46,9 @@ function gotMessage(request, sender, sendResponse){
 			elms.push(a);
 		}
 		removeStuffs(elms);
+		beautifyUI()
+
+
 	}
 }
 
@@ -52,9 +57,27 @@ function removeStuffs(stuffs) {
 	console.log("removing %d elements...", stuffs.length);
 
 	for (let stuff of stuffs) {
-		stuff.remove();
+		if (stuff != undefined) {
+			stuff.remove();
+		}
 		/*for (let elm of stuff) {
 			elm.remove();
 		}*/
 	}
+}
+
+function beautifyUI() {
+	var chart = document.getElementsByClassName(chartStr);
+	//chart[0].setAttribute("style", "display:none;");
+	chart[0].setAttribute("style", "left:0;");
+	
+}
+
+function reload(){
+    var container = document.getElementById(id);
+    var content = container.innerHTML;
+    container.innerHTML= content; 
+    
+   //this line is to watch the result in console , you can remove it later	
+    console.log("Refreshed"); 
 }
